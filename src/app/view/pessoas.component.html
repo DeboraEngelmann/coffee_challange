@@ -1,22 +1,57 @@
 <h2>My Pessoas</h2>
 <div>
-  <label>Pessoa name:</label> <input #pessoaName />
+  <label>Pessoa name:</label> <input class= "form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched" #pessoaName />
   <button (click)="add(pessoaName.value); pessoaName.value=''">
-    Add
+    Adicionar
   </button>
+  <br><br><br>
 </div>
-<ul class="pessoas">
-  <li *ngFor="let pessoa of pessoas" (click)="onSelect(pessoa)"
-      [class.selected]="pessoa === selectedPessoa">
-    <span class="badge">{{pessoa.id}}</span>
-    <span>{{pessoa.name}}</span>
-    <button class="delete"
-      (click)="delete(pessoa); $event.stopPropagation()">x</button>
-  </li>
-</ul>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Cadastro de Clientes
+      </h3>
+    </div>
+    <div class="panel-body">
+        <ul class="list-group">
+          <li *ngFor="let pessoa of pessoas" (click)="onSelect(pessoa)"
+              [class.selected]="pessoa === selectedPessoa"  class="list-group-item">
+            <div class="col-md-2">
+              <span class="badge pull-left">{{pessoa.id}}</span>
+            </div>
+            <span>{{pessoa.name}}</span>
+            <!--<button class="editar"
+              (click)="onSelect(pessoa)"; [class.selected]="pessoa === selectedPessoa">Editar</button>-->
+            <button class="delete"
+              (click)="delete(pessoa); $event.stopPropagation()">Delete</button>
+          </li>
+        </ul>
+      </div>
+  </div>
+</div>
+
+<!--
+<h1>{{title}}</h1>
+<hr>
+<div class="col-md-6">
+    <ul class="list-group">
+        <li *ngFor="#pessoa of pessoas" (click)="onSelect(pessoa)" class="list-group-item">
+            <span [class.selected]="pessoa === selectedPessoa" class="badge">{{pessoa.id}}</span>
+            <a href="#">{{pessoa.name}}</a>
+        </li>
+    </ul>
+</div>-->
+
+
 <div *ngIf="selectedPessoa">
   <h2>
     {{selectedPessoa.name | uppercase}} is my pessoa
   </h2>
   <button (click)="gotoDetail()">View Details</button>
 </div>
+<style>
+    .selected {
+        background: orangered
+    }
+</style>
