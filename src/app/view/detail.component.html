@@ -1,0 +1,15 @@
+<!--Edita o cadastro de pessoa-->
+<div *ngIf="pessoa">
+  <h2>Alterar Cadastro de Pessoas</h2>
+  <div>
+    <label>id: </label>{{pessoa.id}}</div>
+  <div>
+    <label>name: </label>
+    <input [(ngModel)]="pessoa.name" placeholder="name" data-toggle="tooltip" data-placement="bottom" title="Altere como desejar."/>
+  </div>
+  <br><br>
+  <div class="content">
+    <button type="button" class="btn btn-primary" (click)="goBack()">Voltar</button>
+    <button type="button" class="btn btn-sucess" (click)="save()">Salvar</button>
+  </div>
+</div>

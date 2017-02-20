@@ -1,9 +1,39 @@
-<h3>Top Pessoas</h3>
-<div class="grid grid-pad">
-  <a *ngFor="let pessoa of pessoas"  [routerLink]="['/detail', pessoa.id]"  class="col-1-4">
-    <div class="module pessoa">
-      <h4>{{pessoa.name}}</h4>
-    </div>
-  </a>
+<div class="container" id="img-tela-inicial" style="margin:-60px;">
+  <img class="img-responsive" src="../cafe3_3.jpg">
 </div>
-<pessoa-search></pessoa-search>
+<div class="col-md-9" style="margin:80px;">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        Relação das pessoas encarregadas de preparar o café 
+        </h3>
+    </div>
+    <div>
+      <!--Gerar lista aleatórea-->
+      <button class="btn btn-primary btn-lg btn-block" (click)="geraLista();" id="tooltip" data-toggle="tooltip" data-placement="bottom" title="Clique para gerar a lista semanal.">Gerar lista semanal</button>
+    </div>
+      <div class="panel-body" id="printSectionId">
+        <div class="col-md-12">       
+          <table class="table">
+            <thead>
+              <tr>
+                <th id="titulo-tabela">Turno</th>
+                <th id="titulo-tabela">Pessoa Escalada</th>
+              </tr>
+            </thead>
+            <!--Mostra todos os itens da lista de turnos-->
+            <tbody *ngFor="let turno of turnos">
+              <tr>
+                <th>{{turno.name}}</th>
+                <td>{{turno.pessoa}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>   
+    </div>
+     <div>
+              <!--Abre a página para impressão-->
+      <button id="imprimir" (click)="printToCart('printSectionId')" class="btn btn-primary btn-lg btn-block" data-toggle="tooltip" data-placement="bottom" title="Clique para imprimir a lista gerada">Imprimir lista semanal</button>
+    </div>
+  </div>
+</div>

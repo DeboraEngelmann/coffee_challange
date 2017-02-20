@@ -1,18 +1,23 @@
+//Local Storage 
 import { InMemoryDbService } from 'angular-in-memory-web-api';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     let pessoas = [
-      {id: 11, name: 'Mr. Nice'},
-      {id: 12, name: 'Narco'},
-      {id: 13, name: 'Bombasto'},
-      {id: 14, name: 'Celeritas'},
-      {id: 15, name: 'Magneta'},
-      {id: 16, name: 'RubberMan'},
-      {id: 17, name: 'Dynama'},
-      {id: 18, name: 'Dr IQ'},
-      {id: 19, name: 'Magma'},
-      {id: 20, name: 'Tornado'}
+      {id: 1, name: 'PessoaExemplo'}      
+    ],  
+    turnos = [
+    { id: 1, name: 'Segunda-Feira/Manhã', pessoa: ''},
+    { id: 2, name: 'Segunda-Feira/Tarde', pessoa: ''},
+    { id: 3, name: 'Terça-Feira/Manhã', pessoa: '' },
+    { id: 4, name: 'Terça-Feira/Tarde', pessoa: '' },
+    { id: 5, name: 'Quarta-Feira/Manhã', pessoa: '' },
+    { id: 6, name: 'Quarta-Feira/Tarde', pessoa: '' },
+    { id: 7, name: 'Quinta-Feira/Manhã', pessoa: '' },
+    { id: 8, name: 'Quinta-Feira/Tarde', pessoa: '' },
+    { id: 9, name: 'Sexta-Feira/Manhã', pessoa: '' },
+    { id: 10, name: 'Sexta-Feira/Tarde', pessoa: '' }
     ];
-    return {pessoas};
+    return {pessoas,turnos};
   }
 }
+

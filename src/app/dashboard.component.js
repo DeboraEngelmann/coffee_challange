@@ -13,12 +13,51 @@ var pessoa_service_1 = require('./pessoa.service');
 var DashboardComponent = (function () {
     function DashboardComponent(pessoaService) {
         this.pessoaService = pessoaService;
+        //Declaração de variaveis
         this.pessoas = [];
+        this.turnos = [];
+        this.a = 0;
     }
-    DashboardComponent.prototype.ngOnInit = function () {
+    //Pega a lista de pessoas e sorteia uma ordem
+    DashboardComponent.prototype.getPessoas = function () {
         var _this = this;
-        this.pessoaService.getPessoas()
-            .then(function (pessoas) { return _this.pessoas = pessoas.slice(1, 5); });
+        this.pessoaService
+            .getPessoas()
+            .then(function (pessoas) { return _this.pessoas = pessoas.sort(); });
+    };
+    //Pega a lista de turnos
+    DashboardComponent.prototype.getTurnos = function () {
+        var _this = this;
+        this.pessoaService
+            .getTurnos()
+            .then(function (turnos) { return _this.turnos = turnos; });
+    };
+    //Inicia o componente
+    DashboardComponent.prototype.ngOnInit = function () {
+        this.getPessoas();
+        this.getTurnos();
+    };
+    //  Gera a lista de acordo com os parâmetros estipulados
+    DashboardComponent.prototype.geraLista = function () {
+        for (var j = 0, length = this.turnos.length; j < length; j++) {
+            this.turnos[j].pessoa = this.pessoas[this.a].name;
+            if ((this.pessoas.length - 1) == this.a) {
+                this.a = 0;
+            }
+            else {
+                this.a++;
+            }
+            this.pessoaService.updateTurnos(this.turnos[j]);
+        }
+    };
+    // Imprime a lista
+    DashboardComponent.prototype.printToCart = function (printSectionId) {
+        var popupWinindow;
+        var innerContents = document.getElementById(printSectionId).innerHTML;
+        popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+        popupWinindow.document.open();
+        popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="./app/css/dashboard.component.css" /></head><body onload="window.print()">' + innerContents + '</html>');
+        popupWinindow.document.close();
     };
     DashboardComponent = __decorate([
         core_1.Component({

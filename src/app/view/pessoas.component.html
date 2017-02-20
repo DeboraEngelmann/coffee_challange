@@ -1,57 +1,42 @@
-<h2>My Pessoas</h2>
+<!--Formulário responsável por cadastrar as pessoas-->
 <div>
-  <label>Pessoa name:</label> <input class= "form-control ng-pristine ng-valid ng-not-empty ng-valid-required ng-touched" #pessoaName />
-  <button (click)="add(pessoaName.value); pessoaName.value=''">
-    Adicionar
-  </button>
-  <br><br><br>
+  <form [formGroup]="cadForm" (submit)="add()">
+    <label class="cadastro" for="name">Name</label>
+    <input formControlName="name" id="name"  data-toggle="tooltip" data-placement="bottom" title="Informe o nome da pessoa para cadastrar."/>
+    <button type="submit" [disabled]="!cadForm.valid">Cadastrar</button>
+    <control-messages [control]="cadForm.controls.name"></control-messages>
+  </form>
 </div>
-<div class="col-md-6">
+<!--Tabela que mostra as pessoas cadastradas-->
+<div class="col-md-6" id="tabelaCadastro">
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">
-        Cadastro de Clientes
+        Pessoas Cadastradas
       </h3>
     </div>
     <div class="panel-body">
         <ul class="list-group">
-          <li *ngFor="let pessoa of pessoas" (click)="onSelect(pessoa)"
+          <li *ngFor="let pessoa of pessoas"
               [class.selected]="pessoa === selectedPessoa"  class="list-group-item">
             <div class="col-md-2">
               <span class="badge pull-left">{{pessoa.id}}</span>
             </div>
             <span>{{pessoa.name}}</span>
-            <!--<button class="editar"
-              (click)="onSelect(pessoa)"; [class.selected]="pessoa === selectedPessoa">Editar</button>-->
-            <button class="delete"
-              (click)="delete(pessoa); $event.stopPropagation()">Delete</button>
+            <div class="delete">
+              <button (click)="onSelect(pessoa)" type="button" class="btn btn-primary btn-sm">
+  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Editar
+</button>
+           <button (click)="delete(pessoa); $event.stopPropagation()" type="button" class="btn btn-danger btn-sm">
+  <span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Apagar
+</button>
+            
+</div>
           </li>
         </ul>
       </div>
   </div>
 </div>
 
-<!--
-<h1>{{title}}</h1>
-<hr>
-<div class="col-md-6">
-    <ul class="list-group">
-        <li *ngFor="#pessoa of pessoas" (click)="onSelect(pessoa)" class="list-group-item">
-            <span [class.selected]="pessoa === selectedPessoa" class="badge">{{pessoa.id}}</span>
-            <a href="#">{{pessoa.name}}</a>
-        </li>
-    </ul>
-</div>-->
 
 
-<div *ngIf="selectedPessoa">
-  <h2>
-    {{selectedPessoa.name | uppercase}} is my pessoa
-  </h2>
-  <button (click)="gotoDetail()">View Details</button>
-</div>
-<style>
-    .selected {
-        background: orangered
-    }
-</style>

@@ -8,21 +8,22 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// Modulo do aplicativo
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
-var forms_1 = require('@angular/forms'); //Aceitar entradas de formulári
+var forms_1 = require('@angular/forms'); //Aceitar entradas de formulários
 var http_1 = require('@angular/http');
-// Imports for loading & configuring the in-memory web api
-var angular_in_memory_web_api_1 = require('angular-in-memory-web-api');
-var in_memory_data_service_1 = require('./in-memory-data.service');
+var angular_in_memory_web_api_1 = require('angular-in-memory-web-api'); //Cria uma Api virtual
+var in_memory_data_service_1 = require('./in-memory-data.service'); //Cria um serviço de Api
+// Models do aplicativo
 var app_component_1 = require('./app.component');
 var dashboard_component_1 = require('./dashboard.component');
-var pessoa_detail_component_1 = require('./pessoa-detail.component'); //nosso componente que delalha a pessoa
 var pessoas_component_1 = require('./pessoas.component');
-var pessoa_service_1 = require('./pessoa.service');
-var impressao_component_1 = require('./impressao.component');
-var pessoa_search_component_1 = require('./pessoa-search.component');
+var pessoa_service_1 = require('./pessoa.service'); //importa modulo de serviço
+var control_messages_component_1 = require('./control-messages.component');
+var validation_service_1 = require('./validation.service'); //Importa o serviço de validação
 var app_routing_module_1 = require('./app-routing.module');
+var detail_component_1 = require('./detail.component');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -31,20 +32,19 @@ var AppModule = (function () {
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule,
+                forms_1.ReactiveFormsModule,
                 http_1.HttpModule,
                 angular_in_memory_web_api_1.InMemoryWebApiModule.forRoot(in_memory_data_service_1.InMemoryDataService),
-                app_routing_module_1.AppRoutingModule
+                app_routing_module_1.AppRoutingModule,
             ],
-            //Declaramos nossos componentes 
             declarations: [
                 app_component_1.AppComponent,
                 dashboard_component_1.DashboardComponent,
-                pessoa_detail_component_1.PessoaDetailComponent,
                 pessoas_component_1.PessoasComponent,
-                impressao_component_1.ImpressaoComponent,
-                pessoa_search_component_1.PessoaSearchComponent
+                control_messages_component_1.ControlMessagesComponent,
+                detail_component_1.PessoaDetailComponent
             ],
-            providers: [pessoa_service_1.PessoaService],
+            providers: [pessoa_service_1.PessoaService, validation_service_1.ValidationService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

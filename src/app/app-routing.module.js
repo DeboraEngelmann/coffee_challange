@@ -8,18 +8,18 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+// Responsável por criar as rotas
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var dashboard_component_1 = require('./dashboard.component');
 var pessoas_component_1 = require('./pessoas.component');
-var pessoa_detail_component_1 = require('./pessoa-detail.component');
-var impressao_component_1 = require('./impressao.component');
+var detail_component_1 = require('./detail.component');
+// Rotas e endereços
 var routes = [
     { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
     { path: 'dashboard', component: dashboard_component_1.DashboardComponent },
-    { path: 'detail/:id', component: pessoa_detail_component_1.PessoaDetailComponent },
     { path: 'pessoas', component: pessoas_component_1.PessoasComponent },
-    { path: 'impressao', component: impressao_component_1.ImpressaoComponent }
+    { path: 'detail/:id', component: detail_component_1.PessoaDetailComponent }
 ];
 var AppRoutingModule = (function () {
     function AppRoutingModule() {

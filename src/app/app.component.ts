@@ -1,3 +1,4 @@
+// Menu e Rodapé
 import { Component } from '@angular/core';
 
 @Component({

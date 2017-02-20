@@ -16,14 +16,24 @@ var PessoaService = (function () {
     function PessoaService(http) {
         this.http = http;
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
-        this.pessoasUrl = 'api/pessoas'; // URL to web api
+        this.pessoasUrl = 'api/pessoas'; // URL da web api
+        this.turnosUrl = 'api/turnos'; // URL da web api
     }
+    // Retorna a tabela de pessoas
     PessoaService.prototype.getPessoas = function () {
         return this.http.get(this.pessoasUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
+    //Retorna a lista de turnos
+    PessoaService.prototype.getTurnos = function () {
+        return this.http.get(this.turnosUrl)
+            .toPromise()
+            .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    //Retorna o item referente ao id selecionado
     PessoaService.prototype.getPessoa = function (id) {
         var url = this.pessoasUrl + "/" + id;
         return this.http.get(url)
@@ -31,6 +41,7 @@ var PessoaService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
+    //Deleta o item referente ao id selecionado
     PessoaService.prototype.delete = function (id) {
         var url = this.pessoasUrl + "/" + id;
         return this.http.delete(url, { headers: this.headers })
@@ -38,6 +49,7 @@ var PessoaService = (function () {
             .then(function () { return null; })
             .catch(this.handleError);
     };
+    //Cria um novo item na lista
     PessoaService.prototype.create = function (name) {
         return this.http
             .post(this.pessoasUrl, JSON.stringify({ name: name }), { headers: this.headers })
@@ -45,6 +57,7 @@ var PessoaService = (function () {
             .then(function (res) { return res.json().data; })
             .catch(this.handleError);
     };
+    //Atualiza o item da lista pessoas
     PessoaService.prototype.update = function (pessoa) {
         var url = this.pessoasUrl + "/" + pessoa.id;
         return this.http
@@ -53,8 +66,18 @@ var PessoaService = (function () {
             .then(function () { return pessoa; })
             .catch(this.handleError);
     };
+    //Atualiza o item da lista turnos
+    PessoaService.prototype.updateTurnos = function (turnos) {
+        var url = this.turnosUrl + "/" + turnos.id;
+        return this.http
+            .put(url, JSON.stringify(turnos), { headers: this.headers })
+            .toPromise()
+            .then(function () { return turnos; })
+            .catch(this.handleError);
+    };
+    //Retorna se houver algum erro
     PessoaService.prototype.handleError = function (error) {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error);
         return Promise.reject(error.message || error);
     };
     PessoaService = __decorate([
