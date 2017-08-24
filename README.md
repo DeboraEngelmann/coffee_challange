@@ -20,6 +20,7 @@ npm start
 
 
 Funcionalidades:
+
 1 Cadastrar as pessoas
 
 1.1 O nome da pessoa deve ser único, com no mínimo 3 caracteres.
